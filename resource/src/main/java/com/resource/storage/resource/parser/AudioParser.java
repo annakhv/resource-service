@@ -1,34 +1,21 @@
-package com.resource.storage.resource;
+package com.resource.storage.resource.parser;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.sax.BodyContentHandler;
 import org.springframework.web.multipart.MultipartFile;
 
 public class AudioParser {
 
-   public String parseAudio(MultipartFile file){
-
-       //detecting the file type
+   public String parseAudio(MultipartFile file) throws IOException {
        BodyContentHandler handler = new BodyContentHandler();
        Metadata metadata = new Metadata();
-       FileInputStream inputstream = new FileInputStream(new File("example.mp3"));
+       InputStream inputstream = file.getInputStream();
        ParseContext pcontext = new ParseContext();
-
-       //Mp3 parser
-       Mp3Parser  Mp3Parser = new  Mp3Parser();
-       Mp3Parser.parse(inputstream, handler, metadata, pcontext);
-       LyricsHandler lyrics = new LyricsHandler(inputstream,handler);
-
-       while(lyrics.hasLyrics()) {
-           System.out.println(lyrics.toString());
-       }
-
-       System.out.println("Contents of the document:" + handler.toString());
-       System.out.println("Metadata of the document:");
-       String[] metadataNames = metadata.names();
-
-       for(String name : metadataNames) {
-           System.out.println(name + ": " + metadata.get(name));
-       }
-   }
-}
+       return null;
    }
 }
