@@ -21,4 +21,14 @@ public class SongClient {
                 .bodyToMono(Long.class)
                 .block();
     }
+
+    public long[] deleteSongMetaData(String ids) {
+        return songWebClient.delete()
+                .uri(uribuilder -> uribuilder.path("/meta-data/songs")
+                        .queryParam("ids", ids)
+                        .build())
+                .retrieve()
+                .bodyToMono(long[].class)
+                .block();
+    }
 }

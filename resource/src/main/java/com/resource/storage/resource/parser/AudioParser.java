@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import com.resource.storage.resource.dto.SongMetaData;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 @Component
+@Slf4j
 public class AudioParser {
 
    public SongMetaData parseAudio(MultipartFile file) throws IOException, TikaException, SAXException {
@@ -38,10 +40,10 @@ public class AudioParser {
            if (name.equals("xmpDM:releaseDate")) {
                songMetaData.setYear(Integer.parseInt(metadata.get(name)));
            }
-           System.out.println(name + ": " + metadata.get(name));
+           log.info(name + ": " + metadata.get(name));
 
        }
-       System.out.println(songMetaData);
+       log.info(songMetaData.toString());
        return songMetaData;
    }
 
