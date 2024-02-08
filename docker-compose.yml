@@ -1,0 +1,27 @@
+
+version: '3.9'
+
+services:
+  postgres-resource-svc:
+    image: postgres:14-alpine
+    container_name: resource-svc-db
+    ports:
+      - 5433:5432
+    volumes:
+      - ~/apps/postgres/resource:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=resource-password
+      - POSTGRES_USER=resource
+      - POSTGRES_DB=resource
+
+  postgres-song-svc:
+    image: postgres:14-alpine
+    container_name: song-svc-db
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres/song:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=S3cret
+      - POSTGRES_USER=song
+      - POSTGRES_DB=song
